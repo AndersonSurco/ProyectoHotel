@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package presentacion;
 
 import java.io.IOException;
@@ -12,29 +8,51 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import negocio.Empleado;
+import servicio.ServicioEmpleado;
+import servicio.ServicioEmpleadoImp;
 
 /**
  *
  * @author ander
  */
-@WebServlet(name = "Control", urlPatterns = {"/Control"})
-public class Control extends HttpServlet {
-
+@WebServlet(name = "ControlEmpleado", urlPatterns = {"/ControlEmpleado"})
+public class ControlEmpleado extends HttpServlet {
+    private ModeloEmpleado modEmp;
+    private ServicioEmpleado serEmp;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String acc = request.getParameter("acc");
-        if(acc.equals("Iniciar Sesion")){
+        if(acc.equals("Nuevo")){
+            modEmp = new ModeloEmpleado();
+            serEmp = new ServicioEmpleadoImp();
+            request.getSession().setAttribute("sesEmp",modEmp);
+        }else if(acc.equals("Grabar")){
+            String cod = request.getParameter("cod");
+            String nom = request.getParameter("nom");
             String usu = request.getParameter("usu");
             String pas = request.getParameter("pas");
-            
-            response.sendRedirect("Menu.jsp");
+            String msg = serEmp.grabarEmpleado(cod, nom, usu, pas);
+            modEmp.setMsg(msg);
+        }else if(acc.equals("Buscar")){
+            String cod = request.getParameter("cod");
+            Empleado emp = serEmp.buscarEmpleado(cod);
+            if(emp!=null){
+                modEmp.setCod(emp.getCod());
+                modEmp.setNom(emp.getNom());
+                modEmp.setUsu(emp.getUsu());
+                modEmp.setPas(emp.getPas());
+            }else{
+                modEmp.setMsg("No existe el empleado");
+            }
+        }else if(acc.equals("Actualizar")){
+            String cod = request.getParameter("cod");
+            String pas = request.getParameter("pas");
+            String msg = serEmp.actualizarEmpleado(cod, pas);
+            modEmp.setMsg(msg);
         }
-        if(acc.equals("")){
-            
-        }
-        if(acc.equals("")){
-            
-        }
+        response.sendRedirect("VistaEmpleado.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

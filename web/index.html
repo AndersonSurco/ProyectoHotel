@@ -12,6 +12,17 @@ and open the template in the editor.
     </head>
     <body>
         <div>Empresa "CASO HOTEL"</div>
-        <a href="Acceso.jsp">Ingresar al Sistema</a>
+        <form action="ControlAcceso" method="Post">
+            <input type="submit" name="acc" value="Ingresar"/>
+        </form>
+        
+        <form action="ControlReserva" method="Post">
+            <table>
+                <tr>
+                    <td><input type="submit" name="acc" value="Nueva Reserva"/></td>
+                    
+                </tr>
+            </table>
+        </form>
     </body>
 </html>

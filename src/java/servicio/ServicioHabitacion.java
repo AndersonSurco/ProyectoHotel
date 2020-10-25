@@ -5,6 +5,7 @@
  */
 package servicio;
 
+import java.util.List;
 import negocio.Habitacion;
 
 /**
@@ -16,5 +17,5 @@ public interface ServicioHabitacion {
     public String grabarHabitacion(String cod,String tip,String est,String pre);
     public Habitacion buscarHabitacion(String cod);
     public String actualizarHabitacion(String cod , String est);
-    
+    public List listarHabitacion();
 }

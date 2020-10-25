@@ -5,6 +5,7 @@
  */
 package servicio;
 
+import java.util.List;
 import negocio.Reserva;
 
 /**
@@ -16,4 +17,5 @@ public interface ServicioReserva {
     public void agregarHabitacion(String cod , String fecEnt,String fecSal);
     public void quitarHabitacion(String cod);
     public String grabarReserva(String est,String dni);
+    public List listarHabitaciones();
 }

@@ -5,6 +5,7 @@
  */
 package servicio;
 
+import java.util.List;
 import negocio.Habitacion;
 import persistencia.DaoHabitacion;
 import persistencia.DaoHabitacionImp;
@@ -38,6 +39,11 @@ public class ServicioHabitacionImp implements ServicioHabitacion{
         hab.setCod(cod);
         hab.setEst(est);
         return daoHab.actualizar(hab);
+    }
+
+    @Override
+    public List listarHabitacion() {
+        return daoHab.Listar();
     }
     
 }

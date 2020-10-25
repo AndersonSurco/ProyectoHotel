@@ -23,20 +23,21 @@ public class DaoHabitacionImp implements DaoHabitacion{
 
     @Override
     public List Listar() {
-        List lis = new ArrayList();
+        //List lis = new ArrayList();
         String sql = "select * from habitacion";
         List lista = operacion.listar(sql);
         if(lista!=null){
-            for (int i = 0; i < lista.size(); i++) {
+            /*for (int i = 1; i < lista.size(); i++) {
                 Object[]fila = (Object[])lista.get(i);
                 Habitacion hab = new Habitacion();
                 hab.setCod(fila[0].toString());
                 hab.setTip(fila[1].toString());
                 hab.setEst(fila[2].toString());
-                hab.setPre((double)fila[3]);
+                hab.setPre(Double.parseDouble(fila[3].toString()));
                 lis.add(hab);
             }
-            return lis;
+            return lis;*/
+            return lista;
         }
         return null;
     }
