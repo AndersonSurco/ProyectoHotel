@@ -24,7 +24,7 @@ public class ControlEmpleado extends HttpServlet {
             throws ServletException, IOException {
         
         String acc = request.getParameter("acc");
-        if(acc.equals("Nuevo")){
+        if(acc.equals("Nuevo Empleado")){
             modEmp = new ModeloEmpleado();
             serEmp = new ServicioEmpleadoImp();
             request.getSession().setAttribute("sesEmp",modEmp);

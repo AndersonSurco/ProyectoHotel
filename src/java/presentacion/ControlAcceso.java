@@ -23,7 +23,7 @@ public class ControlAcceso extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String acc = request.getParameter("acc");
-        if(acc.equals("Ingresar")){
+        if(acc.equals("Ingresar al Sistema")){
             modEmp = new ModeloEmpleado();
             serEmp = new ServicioEmpleadoImp();
             request.getSession().setAttribute("sesEmp",modEmp);
