@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package presentacion;
 
 import java.io.IOException;
@@ -8,53 +12,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import negocio.Empleado;
-import servicio.ServicioEmpleado;
-import servicio.ServicioEmpleadoImp;
+import negocio.Cliente;
+import servicio.ServicioCliente;
+import servicio.ServicioClienteImp;
 
 /**
  *
  * @author ander
  */
-@WebServlet(name = "ControlEmpleado", urlPatterns = {"/ControlEmpleado"})
-public class ControlEmpleado extends HttpServlet {
-    private ModeloEmpleado modEmp;
-    private ServicioEmpleado serEmp;
+@WebServlet(name = "ControlCliente", urlPatterns = {"/ControlCliente"})
+public class ControlCliente extends HttpServlet {
+    ModeloCliente modCli;
+    ServicioCliente serCli;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String acc = request.getParameter("acc");
-        if(acc.equals("Nuevo Empleado")){
-            modEmp = new ModeloEmpleado();
-            serEmp = new ServicioEmpleadoImp();
-            request.getSession().setAttribute("sesEmp",modEmp);
+        if(acc.equals("Nuevo Cliente")){
+            modCli = new ModeloCliente();
+            serCli = new ServicioClienteImp();
+            request.getSession().setAttribute("sesCli",modCli);
         }else if(acc.equals("Grabar")){
-            String cod = request.getParameter("cod");
+            String dni = request.getParameter("dni");
             String nom = request.getParameter("nom");
-            String usu = request.getParameter("usu");
-            String pas = request.getParameter("pas");
-            String msg = serEmp.grabarEmpleado(cod, nom, usu, pas);
-            modEmp.setMsg(msg);
+            String dir = request.getParameter("dir");
+            String msg = serCli.grabarCliente(dni, nom, dir);
+            modCli.setMsg(msg);
         }else if(acc.equals("Buscar")){
-            String cod = request.getParameter("cod");
-            Empleado emp = serEmp.buscarEmpleado(cod);
-            if(emp!=null){
-                modEmp.setCod(emp.getCod());
-                modEmp.setNom(emp.getNom());
-                modEmp.setUsu(emp.getUsu());
-                modEmp.setPas(emp.getPas());
+            String dni = request.getParameter("dni");
+            Cliente cli = serCli.buscarCliente(dni);
+            if(cli!=null){
+                modCli.setDni(cli.getDni());
+                modCli.setNom(cli.getNom());
+                modCli.setDir(cli.getDir());
             }else{
-                modEmp.setMsg("No existe el empleado");
+                modCli.setMsg("No existe el cliente");
             }
         }else if(acc.equals("Actualizar")){
-            String cod = request.getParameter("cod");
+            String dni = request.getParameter("dni");
             String nom = request.getParameter("nom");
-            String usu = request.getParameter("usu");
-            String pas = request.getParameter("pas");
-            String msg = serEmp.actualizarEmpleado(cod,nom,usu ,pas);
-            modEmp.setMsg(msg);
+            String dir = request.getParameter("dir");
+            String msg = serCli.actualizarCliente(dni,nom,dir);
+            modCli.setMsg(msg);
         }
-        response.sendRedirect("VistaEmpleado.jsp");
+        response.sendRedirect("VistaCliente.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

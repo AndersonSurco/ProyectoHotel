@@ -20,6 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
+        <% ModeloEmpleado modEmp=(ModeloEmpleado)session.getAttribute("sesEmp"); %>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">Proyecto Hotel</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -29,7 +30,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#"><%=modEmp.getCod()%></a>
                         <a class="dropdown-item" href="#">Recepcionista</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="login.html">Salir</a>
@@ -56,7 +57,7 @@
                             <!--Gestion Habitacion-->
                             <form action="ControlHabitacion" method="Post" class="nav-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-bed"></i></div>
-                                <input type="submit" name="acc" value="Nueva Habitación" class="input-sinEstilo"/>
+                                <input type="submit" name="acc" value="Nueva Habitacion" class="input-sinEstilo"/>
                             </form>
                             <div class="sb-sidenav-menu-heading">Gestión de Reservas</div>
                             <!--Gestion Reserva-->
@@ -68,20 +69,25 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Desarrollo Web</div>
-                        
+                      
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <!--SESION-->
-                <% ModeloEmpleado modEmp=(ModeloEmpleado)session.getAttribute("sesEmp"); %>
+                
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Inicio</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Inicio <%=modEmp.getCod()%> <%=modEmp.getNom()%></li>
+                            <li class="breadcrumb-item active">Inicio</li>
                         </ol>
-                        <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title" style="text-align: center; margin-bottom: 0rem;">¡Bienvenido <%=modEmp.getNom()%>!</h3>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px;">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Empleados</div>

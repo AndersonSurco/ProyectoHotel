@@ -24,7 +24,7 @@ public class ServicioHabitacionImp implements ServicioHabitacion{
     
     @Override
     public String grabarHabitacion(String cod, String tip, String est, String pre) {
-        Habitacion hab = new Habitacion(cod, cod, est,Double.parseDouble(pre));
+        Habitacion hab = new Habitacion(cod, tip, est,Double.parseDouble(pre));
         return daoHab.Grabar(hab);
     }
 
@@ -34,10 +34,12 @@ public class ServicioHabitacionImp implements ServicioHabitacion{
     }
 
     @Override
-    public String actualizarHabitacion(String cod, String est) {
+    public String actualizarHabitacion(String cod, String tip,String est ,String pre) {
         Habitacion hab = new Habitacion();
         hab.setCod(cod);
+        hab.setTip(tip);
         hab.setEst(est);
+        hab.setPre(Double.parseDouble(pre));
         return daoHab.actualizar(hab);
     }
 

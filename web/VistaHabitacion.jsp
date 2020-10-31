@@ -1,4 +1,9 @@
-<%@page import="presentacion.ModeloReserva"%>
+<%-- 
+    Document   : vistaHabitacion
+    Created on : 30-oct-2020, 23:17:37
+    Author     : ander
+--%>
+<%@page import="presentacion.ModeloHabitacion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,48 +128,62 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid">
-            <h1 class="mt-4">Gestión de Reserva</h1>
+            <h1 class="mt-4">Gestión de Habitación</h1>
 
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="Menu.jsp">Inicio</a></li>
-              <li class="breadcrumb-item active">Nueva Reserva</li>
+              <li class="breadcrumb-item active">Nueva Habitacion</li>
             </ol>
-            <!--DATOS-->
-            <% ModeloReserva mr = (ModeloReserva)session.getAttribute("sesRes");
-            %>
-            <form action="ControlReserva" method="Post">
-              <div class="card mb-4">
-                <div class="card-header">
-                  <i class="fas fa-edit"></i>
-                  Datos
-                </div>
-                <div class="card-body">
+
+            <div class="card mb-4">
+              <div class="card-header">
+                <i class="fas fa-bed"></i>
+                Habitación
+              </div>
+              <div class="card-body">
+                <!--FORMULARIO-->
+                <% ModeloHabitacion modHab=(ModeloHabitacion)session.getAttribute("sesHab"); %>
+                <form action="ControlHabitacion" method="Post">
                   <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                      <label>Numero</label>
+                    <div class="col-md-6 mb-2">
+                      <label>Código</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"
-                            ><i class="fa fa-list-ol"></i
+                            ><i class="fa fa-id-card"></i
                           ></span>
                         </div>
-                        <input type="text" class="form-control" value="" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Ingresa un código"
+                          name="cod"
+                          value='<%= modHab.getCod() %>'
+                        />
                       </div>
                     </div>
 
-                    <div class="col-md-4 mb-3">
-                      <label>Fecha</label>
+                    <div class="col-md-6 mb-2">
+                      <label>Tipo</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"
-                            ><i class="fas fa-calendar-alt"></i
+                            ><i class="fa fa-align-left"></i
                           ></span>
                         </div>
-                        <input type="text" class="form-control" value="" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Ingresa un estado"
+                          name="tip"
+                          value='<%= modHab.getTip() %>'
+                        />
                       </div>
                     </div>
+                  </div>
 
-                    <div class="col-md-4 mb-3">
+                  <div class="form-row">
+                    <div class="col-md-6 mb-2">
                       <label>Estado</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -172,189 +191,18 @@
                             ><i class="fas fa-bell"></i
                           ></span>
                         </div>
-                        <input type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                      <label>Cliente</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"
-                            ><i class="fa fa-users"></i
-                          ></span>
-                        </div>
-                        <input type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                      <label>Nombre</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"
-                            ><i class="fa fa-align-left"></i
-                          ></span>
-                        </div>
-                        <input type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                      <label>Descuento </label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"
-                            ><i class="fas fa-coins"></i
-                          ></span>
-                        </div>
-                        <input type="text" class="form-control" value="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--RESERVA-->
-              <div class="card mb-4">
-                <div class="card-header">
-                  <i class="fas fa-hotel"></i>
-                  Reserva
-                </div>
-                <div class="card-body">
-                  <!--TABLA-->
-                  <div class="table-responsive">
-                    <table
-                      class="table table-bordered"
-                      id="dataTable"
-                      width="100%"
-                      cellspacing="0"
-                    >
-                      <thead>
-                        <tr>
-                          <th>Código</th>
-                          <th>Tipo</th>
-                          <th>Precio</th>
-                          <th>Dias</th>
-                          <th>Importe</th>
-                          <th>Acción</th>
-                        </tr>
-                      </thead>
-                      <tfoot>
-                        <tr>
-                          <th>Código</th>
-                          <th>Tipo</th>
-                          <th>Precio</th>
-                          <th>Dias</th>
-                          <th>Importe</th>
-                          <th>Acción</th>
-                        </tr>
-                      </tfoot>
-                      <tbody>
-                        <% for (int i = 0; i < mr.getCes().size(); i++) {%> <%
-                        Object[] f =(Object[])mr.getCes().get(i); %>
-                        <tr>
-                          <form action="ControlReserva" method="Post">
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="cod"
-                                size="5"
-                                value="<%= f[0] %>"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control input-sinEstilo"
-                                size="15"
-                                value="<%= f[1] %>"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control"
-                                size="5"
-                                value="<%= f[2] %>"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control"
-                                size="5"
-                                value="<%= f[3] %>"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="text"
-                                class="form-control"
-                                size="5"
-                                value="<%= f[4] %>"
-                              />
-                            </td>
-                            <td>
-                              <input
-                                type="submit"
-                                class="btn btn-primary btn-block"
-                                name="acc"
-                                value="Quitar"
-                              />
-                            </td>
-                          </form>
-                        </tr>
-                        <% } %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card mb-4">
-                <div class="card-header">
-                  <i class="fas fa-file-invoice-dollar"></i>
-                  Importe
-                </div>
-                <div class="card-body">
-                  <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                      <label>Subtotal</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"
-                            ><i class="fas fa-cash-register"></i
-                          ></span>
-                        </div>
                         <input
                           type="text"
                           class="form-control"
-                          value="<%= mr.getSubTot() %>"
+                          placeholder="Ingresa una Habitación"
+                          name="est"
+                          value='<%= modHab.getEst() %>'
                         />
                       </div>
                     </div>
 
-                    <div class="col-md-4 mb-3">
-                      <label>Descuento</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"
-                            ><i class="fas fa-piggy-bank"></i
-                          ></span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          value="<%= mr.getDesc() %>"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                      <label>Total</label>
+                    <div class="col-md-6 mb-3">
+                      <label>Precio</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"
@@ -364,49 +212,64 @@
                         <input
                           type="text"
                           class="form-control"
-                          value="<%= mr.getTot() %>"
+                          placeholder="Ingresa un precio"
+                          name="pre"
+                          value='<%= modHab.getPre() %>'
                         />
                       </div>
                     </div>
                   </div>
-                  <!--BOTONES-->
+
                   <div class="form-row">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-2">
                       <div class="input-group">
                         <input
                           type="submit"
                           class="btn btn-primary btn-block"
                           name="acc"
-                          value="Nueva Reserva"
+                          value="Nueva Habitacion"
                         />
                       </div>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-2">
                       <div class="input-group">
                         <input
                           type="submit"
                           class="btn btn-primary btn-block"
                           name="acc"
-                          value="Listar Habitaciones"
+                          value="Grabar"
                         />
                       </div>
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-2">
                       <div class="input-group">
                         <input
                           type="submit"
                           class="btn btn-primary btn-block"
                           name="acc"
-                          value="Grabar Reserva"
+                          value="Buscar"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="input-group">
+                        <input
+                          type="submit"
+                          class="btn btn-primary btn-block"
+                          name="acc"
+                          value="Actualizar"
                         />
                       </div>
                     </div>
                   </div>
-                </div>
+                  <%= modHab.getMsg()%>
+                </form>
+                <!--FIN FORMULARIOS-->
               </div>
-            </form>
+            </div>
           </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
@@ -450,3 +313,4 @@
     ></script>
   </body>
 </html>
+

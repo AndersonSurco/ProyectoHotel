@@ -16,5 +16,5 @@ public interface ServicioCliente {
     public Cliente validarCliente(String dni,String nom);
     public String grabarCliente(String dni,String nom,String dir);
     public Cliente buscarCliente(String dni);
-    public String actualizarCliente(String dni , String nom);
+    public String actualizarCliente(String dni , String nom , String dir);
 }

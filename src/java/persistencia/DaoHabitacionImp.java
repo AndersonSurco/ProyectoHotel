@@ -17,7 +17,7 @@ public class DaoHabitacionImp implements DaoHabitacion{
     
     @Override
     public String Grabar(Habitacion hab) {
-        String sql = "Insert into habitacion values('"+hab.getCod()+"','"+hab.getTip()+"','"+hab.getEst()+"','"+hab.getPre()+"')";
+        String sql = "Insert into habitacion values('"+hab.getCod()+"','"+hab.getTip()+"','"+hab.getEst()+"',"+hab.getPre()+")";
         return operacion.ejecutar(sql);
     }
 
@@ -59,7 +59,7 @@ public class DaoHabitacionImp implements DaoHabitacion{
 
     @Override
     public String actualizar(Habitacion hab) {
-        String sql = "update habitacion set est='"+hab.getEst()+"' where cod='"+hab.getCod()+"'";
+        String sql = "update habitacion set tip='"+hab.getTip()+"',est='"+hab.getEst()+"',pre="+hab.getPre()+" where cod='"+hab.getCod()+"'";
         return operacion.ejecutar(sql);
     }
     

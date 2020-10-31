@@ -53,7 +53,7 @@ public class DaoClienteImp implements DaoCliente{
 
     @Override
     public String actualizar(Cliente cli) {
-        String sql = "update cliente set nom='"+cli.getNom()+"' where dni='"+cli.getDni()+"'";
+        String sql = "update cliente set nom='"+cli.getNom()+"',dir='"+cli.getDir()+"' where dni='"+cli.getDni()+"'";
         return operacion.ejecutar(sql);
     }
     

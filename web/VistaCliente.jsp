@@ -1,10 +1,9 @@
 <%-- 
-    Document   : VistaEmpleado
-    Created on : 24-oct-2020, 17:22:02
+    Document   : VistaCliente
+    Created on : 30-oct-2020, 22:46:41
     Author     : ander
 --%>
-
-<%@page import="presentacion.ModeloEmpleado"%>
+<%@page import="presentacion.ModeloCliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,6 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
       crossorigin="anonymous"
     ></script>
-    <script src="js/ocultar.js"></script>
   </head>
   <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -130,25 +128,25 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid">
-            <h1 class="mt-4">Gestión de Empleado</h1>
+            <h1 class="mt-4">Gestión de Cliente</h1>
 
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="Menu.jsp">Inicio</a></li>
-              <li class="breadcrumb-item active">Nuevo Empleado</li>
+              <li class="breadcrumb-item active">Nuevo Cliente</li>
             </ol>
 
             <div class="card mb-4">
               <div class="card-header">
-                <i class="fas fa-user-secret"></i>
-                Empleado
+                <i class="fa fa-users"></i>
+                Cliente
               </div>
               <div class="card-body">
                 <!--FORMULARIO-->
-                <% ModeloEmpleado modEmp=(ModeloEmpleado)session.getAttribute("sesEmp"); %>
-                <form action="ControlEmpleado" method="Post">
+                <% ModeloCliente modCli=(ModeloCliente)session.getAttribute("sesCli"); %>
+                <form action="ControlCliente" method="Post">
                   <div class="form-row">
-                    <div class="col-md-6 mb-2">
-                      <label>Código</label>
+                    <div class="col-md-4 mb-3">
+                      <label>DNI</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"
@@ -158,15 +156,14 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Ingresa un código"
-                          name="cod"
-                          value='<%= modEmp.getCod() %>'
-                         
+                          name="dni"
+                          value="<%= modCli.getDni() %>"
+                          placeholder="Ingresa un numero de DNI"
                         />
                       </div>
                     </div>
 
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-4 mb-3">
                       <label>Nombre</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -177,54 +174,34 @@
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Ingresa un nombre"
                           name="nom"
-                          value='<%= modEmp.getNom() %>'
-       
+                          value="<%= modCli.getNom() %>"
+                          placeholder="Ingresa un nombre"
+                   
                         />
                       </div>
                     </div>
-                  </div>
 
-                  <div class="form-row">
-                    <div class="col-md-6 mb-2">
-                      <label>Usuario</label>
+                    <div class="col-md-4 mb-3">
+                      <label>Dirección</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"
-                            ><i class="fa fa-user"></i
+                            ><i class="fas fa-house-user"></i
                           ></span>
                         </div>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Ingresa un usuario"
-                          name="usu"
-                          value='<%= modEmp.getUsu() %>'
-                        />
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                      <label>Contraseña</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"
-                            ><i class="fa fa-key"></i
-                          ></span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Ingresa una contraseña"
-                          name="pas"
-                          value='<%= modEmp.getPas() %>'
-                        
+                          name="dir"
+                          value="<%= modCli.getDir()%>"
+                          placeholder="Ingresa una dirección"
+                          
                         />
                       </div>
                     </div>
                   </div>
-
+                  <!--BOTONES-->
                   <div class="form-row">
                     <div class="col-md-3 mb-2">
                       <div class="input-group">
@@ -232,7 +209,7 @@
                           type="submit"
                           class="btn btn-primary btn-block"
                           name="acc"
-                          value="Nuevo Empleado"
+                          value="Nuevo Cliente"
                         />
                       </div>
                     </div>
@@ -270,7 +247,7 @@
                       </div>
                     </div>
                   </div>
-                      <%= modEmp.getMsg()%>                 
+                  <%= modCli.getMsg()%>
                 </form>
                 <!--FIN FORMULARIOS-->
               </div>
@@ -295,7 +272,6 @@
         </footer>
       </div>
     </div>
-                  
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"
       crossorigin="anonymous"

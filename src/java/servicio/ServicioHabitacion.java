@@ -16,6 +16,6 @@ public interface ServicioHabitacion {
     
     public String grabarHabitacion(String cod,String tip,String est,String pre);
     public Habitacion buscarHabitacion(String cod);
-    public String actualizarHabitacion(String cod , String est);
+    public String actualizarHabitacion(String cod , String tip ,String est ,String pre);
     public List listarHabitacion();
 }

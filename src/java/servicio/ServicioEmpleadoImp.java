@@ -50,9 +50,11 @@ public class ServicioEmpleadoImp implements ServicioEmpleado{
     }
 
     @Override
-    public String actualizarEmpleado(String cod, String pas) {
+    public String actualizarEmpleado(String cod, String nom,String usu ,String pas) {
         Empleado emp = new Empleado();
         emp.setCod(cod);
+        emp.setNom(nom);
+        emp.setUsu(usu);
         emp.setPas(pas);
         return daoEmp.actualizar(emp);
     }

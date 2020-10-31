@@ -50,9 +50,10 @@ public class ServicioClienteImp implements ServicioCliente{
     }
 
     @Override
-    public String actualizarCliente(String dni, String nom) {
+    public String actualizarCliente(String dni, String nom,String dir) {
         Cliente cli = new Cliente();
         cli.setDni(dni);
+        cli.setDir(dir);
         cli.setNom(nom);
         return daoCli.actualizar(cli);
     }

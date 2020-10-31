@@ -57,7 +57,7 @@ public class DaoEmpleadoImp implements DaoEmpleado{
 
     @Override
     public String actualizar(Empleado emp) {
-        String sql = "update empleado set pas='"+emp.getPas()+"' where cod='"+emp.getCod()+"'";
+        String sql = "update empleado set nom='"+emp.getNom()+"',usu='"+emp.getUsu()+"',pas='"+emp.getPas()+"' where cod='"+emp.getCod()+"'";
         return operacion.ejecutar(sql);
     }
 

@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package presentacion;
 
 import java.io.IOException;
@@ -8,53 +12,53 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import negocio.Empleado;
-import servicio.ServicioEmpleado;
-import servicio.ServicioEmpleadoImp;
+import negocio.Habitacion;
+import servicio.ServicioHabitacion;
+import servicio.ServicioHabitacionImp;
 
 /**
  *
  * @author ander
  */
-@WebServlet(name = "ControlEmpleado", urlPatterns = {"/ControlEmpleado"})
-public class ControlEmpleado extends HttpServlet {
-    private ModeloEmpleado modEmp;
-    private ServicioEmpleado serEmp;
+@WebServlet(name = "ControlHabitacion", urlPatterns = {"/ControlHabitacion"})
+public class ControlHabitacion extends HttpServlet {
+    private ModeloHabitacion modHab;
+    private ServicioHabitacion serHab;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String acc = request.getParameter("acc");
-        if(acc.equals("Nuevo Empleado")){
-            modEmp = new ModeloEmpleado();
-            serEmp = new ServicioEmpleadoImp();
-            request.getSession().setAttribute("sesEmp",modEmp);
+        if(acc.equals("Nueva Habitacion")){
+            modHab = new ModeloHabitacion();
+            serHab = new ServicioHabitacionImp();
+            request.getSession().setAttribute("sesHab",modHab);
         }else if(acc.equals("Grabar")){
             String cod = request.getParameter("cod");
-            String nom = request.getParameter("nom");
-            String usu = request.getParameter("usu");
-            String pas = request.getParameter("pas");
-            String msg = serEmp.grabarEmpleado(cod, nom, usu, pas);
-            modEmp.setMsg(msg);
+            String tip = request.getParameter("tip");
+            String est = request.getParameter("est");
+            String pre = request.getParameter("pre");
+            String msg = serHab.grabarHabitacion(cod, tip, est, pre);
+            modHab.setMsg(msg);
         }else if(acc.equals("Buscar")){
             String cod = request.getParameter("cod");
-            Empleado emp = serEmp.buscarEmpleado(cod);
-            if(emp!=null){
-                modEmp.setCod(emp.getCod());
-                modEmp.setNom(emp.getNom());
-                modEmp.setUsu(emp.getUsu());
-                modEmp.setPas(emp.getPas());
+            Habitacion hab = serHab.buscarHabitacion(cod);
+            if(hab!=null){
+                modHab.setCod(hab.getCod());
+                modHab.setTip(hab.getTip());
+                modHab.setEst(hab.getEst());
+                modHab.setPre(String.valueOf(hab.getPre()));
             }else{
-                modEmp.setMsg("No existe el empleado");
+                modHab.setMsg("No existe la habitación");
             }
         }else if(acc.equals("Actualizar")){
             String cod = request.getParameter("cod");
-            String nom = request.getParameter("nom");
-            String usu = request.getParameter("usu");
-            String pas = request.getParameter("pas");
-            String msg = serEmp.actualizarEmpleado(cod,nom,usu ,pas);
-            modEmp.setMsg(msg);
+            String tip = request.getParameter("tip");
+            String est = request.getParameter("est");
+            String pre = request.getParameter("pre");
+            String msg = serHab.actualizarHabitacion(cod,tip, est,pre);
+            modHab.setMsg(msg);
         }
-        response.sendRedirect("VistaEmpleado.jsp");
+        response.sendRedirect("VistaHabitacion.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
