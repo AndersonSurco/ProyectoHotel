@@ -6,7 +6,12 @@ Este sistema permite la gestión de empleados,clientes,habitaciones y principalm
 * Java EE
 * JavaScript
 * Html
-* Boostrap 
+* Bootstrap 
+* Java DB
+
+## Vistas
+
+
 
   
   
